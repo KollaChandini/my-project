@@ -12,7 +12,10 @@ on:
 jobs:
   build-java:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
   
     steps:
     - uses: actions/checkout@v2
@@ -21,9 +24,6 @@ jobs:
       with:
         java-version: '1.8'
        
-
-    # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
-    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: grant execution permission
       run: chmod +x gradlew
 
